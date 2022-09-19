@@ -13,9 +13,10 @@
 	<version>1</version>
 	<name>Tienda_IIIQ</name>
 	<description>Clase web y patrones</description>
-	<properties>
+	<!--<properties>
 		<java.version>18</java.version>
 	</properties>
+         -->
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
