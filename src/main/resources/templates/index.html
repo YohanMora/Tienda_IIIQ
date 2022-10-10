@@ -30,10 +30,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                 </thead>
                 <tbody>
                     <tr th:each="item : ${listaClientes}">
-                        <td th:text="{item.nombre}"></td>
-                        <td th:text="{item.apellidos}"></td>
-                        <td th:text="{item.correo}"></td>
-                        <td th:text="{item.telefono}"></td>
+                        <td th:text="${item.nombre}"></td>
+                        <td th:text="${item.apellidos}"></td>
+                        <td th:text="${item.correo}"></td>
+                        <td th:text="${item.telefono}"></td>
                     </tr>
                 </tbody>
             </table> 

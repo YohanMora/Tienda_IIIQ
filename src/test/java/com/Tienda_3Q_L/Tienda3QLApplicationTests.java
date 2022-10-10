@@ -1,10 +1,10 @@
-package com.Tienda_IIIQ;
+package com.Tienda_3Q_L;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class TiendaIiiqApplicationTests {
+class Tienda3QLApplicationTests {
 
 	@Test
 	void contextLoads() {
