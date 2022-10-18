@@ -10,7 +10,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <h1>Listado de clientes</h1>
+        <header th:replace="layout/plantilla :: header"/>
         <br/>
         <a th:href="@{/nuevoCliente}">Nuevo cliente</a>
         <div th:if="${listaClientes != null and !listaClientes.empty}">
@@ -40,6 +40,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         <div th:if="${listaClientes == null or listaClientes.empty}">
             Lista de clientes vacía
         </div>
-
+        <footer th:replace="layout/plantilla :: footer"/>
     </body>
 </html>
