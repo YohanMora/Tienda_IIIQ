@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>TechShop</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="/css/menu.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <div class="contenido">
+            <h2>Listado de clientes</h2>
+            <a th:href="@{nuevoCliente}">Nuevo Cliente</a>
+            <div th:if="${listaClientes != null and !listaClientes.empty}">
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Apellidos</th>
+                            <th>Correo</th>
+                            <th>Teléfono</th>
+                            <th>Limite</th>
+                            <th>Modificar</th>
+                            <th>Eliminar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="item : ${listaClientes}">
+                            <td th:text="${item.nombre}"></td>
+                            <td th:text="${item.apellidos}"></td>
+                            <td th:text="${item.correo}"></td>
+                            <td th:text="${item.telefono}"></td>
+                            <td th:text="${#numbers.formatDecimal(item.credito.limite, 3,2)}"></td>
+                            <td><a th:href="@{/cliente/modificarCliente/} + ${item.idCliente}">Modificar</a></td>
+                            <td><a th:href="@{/cliente/eliminarCliente/} + ${item.idCliente}">Eliminar</a></td>
+                        </tr>
+                    </tbody>
+                </table> 
+            </div>
+            <div th:if="${listaClientes == null or listaClientes.empty}">
+                Lista de clientes vacía
+            </div>
+        </div>
+        <footer th:replace="layout/plantilla :: footer"/>
+    </body>
+</html>

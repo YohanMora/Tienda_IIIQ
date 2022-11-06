@@ -8,26 +8,32 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         <title>TechShop</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="css/menu.css" rel="stylesheet" type="text/css"/>
+        <link href="/css/menu.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <header th:replace="layout/plantilla :: header"/>
         <br/>
         <div class="contenido">
-            <h2>Nuestros Articulos</h2>
+            <h2>Listado Articulos</h2>
+            <a th:href="@{/articulo/nuevoArticulo}">Nuevo Articulo</a>
             <div th:if="${listaArticulos != null and !listaArticulos.empty}">
                 <table border="1">
                     <thead>
                         <tr>
                             <th>Descripción</th>
                             <th>Precio</th>
+                            <th>Existencias</th>
+                            <th>Activo</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr th:each="item : ${listaArticulos}">
                             <td th:text="${item.descripcion}"></td>
-                            <td th:text="${#numbers.formatDecimal(item.precio,3,2)}"></td>
-                            <td><a th:href="@{/carrito/agregar/} + ${item.idArticulo}">Agregar</a></td>
+                            <td th:text="${#numbers.formatDecimal(item.precio,3,2)}"></td>            
+                            <td th:text="${item.existencias}"></td>
+                            <td><input type="checkbox" name="activo" th:checked="${item.activo}" disabled/></td>
+                            <td><a th:href="@{/articulo/modificarArticulo/} + ${item.idArticulo}">Modificar</a></td>
+                            <td><a th:href="@{/articulo/eliminarArticulo/} + ${item.idArticulo}">Eliminar</a></td>
                         </tr>
                     </tbody>
                 </table> 
