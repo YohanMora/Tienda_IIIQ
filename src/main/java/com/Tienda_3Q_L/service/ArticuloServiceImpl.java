@@ -51,4 +51,14 @@ public class ArticuloServiceImpl implements ArticuloService {
         articuloDao.delete(articulo);
     }
 
+    @Override
+    public List<Articulo> getPorExistencias(int existencias) {
+        return articuloDao.findByExistencias(existencias);
+    }
+
+    @Override
+    public List<Articulo> getPorExistenciasCategorias(int existencias, long idCategoria) {
+        return articuloDao.findByExistenciasOrIdCategoria(existencias, idCategoria); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 }

@@ -21,4 +21,8 @@ public interface ArticuloService {
     
     public void delete(Articulo articulo);
     
+    public List<Articulo> getPorExistencias(int existencias);
+    
+    public List<Articulo> getPorExistenciasCategorias(int existencias, long idCategoria);
+    
 }

@@ -22,7 +22,8 @@ public class IndexController {
     @GetMapping("/")
     public String page(Model model) {
         var articulos = articuloService.getArticulos(true);
-     
+        //var articulos = articuloService.getPorExistencias(5);
+        //var articulos = articuloService.getPorExistenciasCategorias(5,1);
         model.addAttribute("listaArticulos",articulos);
         
         return "index";
