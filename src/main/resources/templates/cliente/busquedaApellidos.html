@@ -14,9 +14,20 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         <header th:replace="layout/plantilla :: header"/>
         <br/>
         <div class="contenido">
-            <h2>Listado de clientes</h2>
-            <a th:href="@{nuevoCliente}">Nuevo Cliente</a>
-            <a th:href="@{busquedaApellido}">Buscar por apellidos</a>
+            <h2>Búsqueda por apellidos</h2>
+            <a th:href="@{/cliente/listado}">Regresar</a>
+            <br/>
+            <br/>
+            <form th:action="@{/cliente/buscarCliente}"
+                  method="post"
+                  th:object="${cliente}">
+                <label for="apellidos">Apellidos: </label>
+                <input type="text" name="apellidos" th:field="*{apellidos}"/>
+                <br/>
+                <br/>
+                <input type="submit" name="Buscar" value="Buscar" />
+            </form>
+            <br/>
             <br/>
             <div th:if="${listaClientes != null and !listaClientes.empty}">
                 <table border="1">
@@ -27,8 +38,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                             <th>Correo</th>
                             <th>Teléfono</th>
                             <th>Limite</th>
-                            <th>Modificar</th>
-                            <th>Eliminar</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -38,14 +47,12 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                             <td th:text="${item.correo}"></td>
                             <td th:text="${item.telefono}"></td>
                             <td th:text="${#numbers.formatDecimal(item.credito.limite, 3,2)}"></td>
-                            <td><a th:href="@{/cliente/modificarCliente/} + ${item.idCliente}">Modificar</a></td>
-                            <td><a th:href="@{/cliente/eliminarCliente/} + ${item.idCliente}">Eliminar</a></td>
                         </tr>
                     </tbody>
                 </table> 
             </div>
             <div th:if="${listaClientes == null or listaClientes.empty}">
-                Lista de clientes vacía
+                No se encotraron resultados
             </div>
         </div>
         <footer th:replace="layout/plantilla :: footer"/>

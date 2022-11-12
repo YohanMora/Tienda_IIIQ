@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  *
@@ -19,47 +18,62 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class ClienteController {
-    
+
     @Autowired
     private ClienteService clienteService;
-    
+
     @GetMapping("/cliente/listado")
     public String page(Model model) {
         var clientes = clienteService.getClientes();
-     
-        model.addAttribute("listaClientes",clientes);
-        
+
+        model.addAttribute("listaClientes", clientes);
+
         return "/cliente/listado";
     }
-    
+
     @GetMapping("/cliente/nuevoCliente")
     public String nuevoCliente(Cliente cliente) {
-        
+
         return "/cliente/modificarCliente";
     }
-    
+
     @PostMapping("/cliente/guardarCliente")
     public String guardarCliente(Cliente cliente) {
-        
+
         clienteService.save(cliente);
         return "redirect:/cliente/listado";
     }
-    
+
     @GetMapping("/cliente/modificarCliente/{idCliente}")
     public String modificarCliente(Cliente cliente, Model model) {
-        
+
         cliente = clienteService.getCliente(cliente);
-        
-        model.addAttribute("cliente",cliente);
+
+        model.addAttribute("cliente", cliente);
         //clienteService.save(cliente);
         return "/cliente/modificarCliente";
     }
-    
+
     @GetMapping("/cliente/eliminarCliente/{idCliente}")
     public String eliminarCliente(Cliente cliente) {
-        
+
         clienteService.delete(cliente);
-        
+
         return "redirect:/cliente/listado/";
+    }
+
+    @GetMapping("/cliente/busquedaApellido")
+    public String busquedaApellido(Model model, Cliente cliente) {
+        model.addAttribute("cliente", cliente);
+        return "/cliente/busquedaApellidos";
+    }
+
+    @PostMapping("/cliente/buscarCliente")
+    public String buscarCliente(Model model, Cliente cliente) {
+
+        var clientes = clienteService.getClientePorApellido(cliente.getApellidos());
+        model.addAttribute("listaClientes", clientes);
+        model.addAttribute("cliente", cliente);
+        return "/cliente/busquedaApellidos";
     }
 }

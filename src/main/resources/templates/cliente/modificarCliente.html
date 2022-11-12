@@ -11,6 +11,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         <link href="/css/menu.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
+        <header th:replace="layout/plantilla :: header"/>
+        <br/>
         <div class="contenido">
             <h2>Datos del cliente</h2>
             <a th:href="@{/cliente/listado}">Regresar</a>
