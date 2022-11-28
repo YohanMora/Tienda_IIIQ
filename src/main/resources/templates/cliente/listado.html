@@ -38,8 +38,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                             <td th:text="${item.correo}"></td>
                             <td th:text="${item.telefono}"></td>
                             <td th:text="${#numbers.formatDecimal(item.credito.limite, 3,2)}"></td>
-                            <td><a th:href="@{/cliente/modificarCliente/} + ${item.idCliente}">Modificar</a></td>
-                            <td><a th:href="@{/cliente/eliminarCliente/} + ${item.idCliente}">Eliminar</a></td>
+                            <td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/cliente/modificarCliente/} + ${item.idCliente}">Modificar</a></td>
+                            <td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/cliente/eliminarCliente/} + ${item.idCliente}">Eliminar</a></td>
                         </tr>
                     </tbody>
                 </table> 

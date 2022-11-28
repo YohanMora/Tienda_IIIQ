@@ -14,30 +14,32 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         <header th:replace="layout/plantilla :: header"/>
         <br/>
         <div class="contenido">
-            <h2>Listado Categoria</h2>
-            <a th:href="@{/categoria/nuevoCategoria}">Nueva Categoria</a>
+            <h2 th:text="#{categoria.titulo}">Listado Categoria</h2>
+            <a th:href="@{/categoria/nuevoCategoria}" th:text="#{articulo.nuevo}">Nueva Categoria</a>
             <div th:if="${listaCategorias != null and !listaCategorias.empty}">
                 <table border="1">
                     <thead>
                         <tr>
-                            <th>Descripción</th>
-                            <th>Activo</th>
-                            <th>Modificar</th>
-                            <th>Eliminar</th>
+                            <th th:text="#{categoria.descripcion}">Descripción</th>
+                            <th th:text="#{categoria.activo}">Activo</th>
+                            <th th:text="#{accion.actualizar}">Modificar</th>
+                            <th th:text="#{accion.eliminar}">Eliminar</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr th:each="item : ${listaCategorias}">
                             <td th:text="${item.descripcion}"></td>
                             <td><input type="checkbox" name="activo" th:checked="${item.activo}" disabled/></td>
-                            <td><a th:href="@{/categoria/modificarCategoria/} + ${item.idCategoria}">Modificar</a></td>
-                            <td><a th:href="@{/categoria/eliminarCategoria/} + ${item.idCategoria}">Eliminar</a></td>
+                            <td><a th:href="@{/categoria/modificarCategoria/} + ${item.idCategoria}" th:text="#{accion.actualizar}">Modificar</a></td>
+                            <td><a th:href="@{/categoria/eliminarCategoria/} + ${item.idCategoria}" th:text="#{accion.eliminar}">Eliminar</a></td>
                         </tr>
                     </tbody>
                 </table> 
             </div>
             <div th:if="${listaCategorias == null or listaCategorias.empty}">
-                Lista de categoria vacía
+                <p>
+                    [[#{articulo.no_mostrar}]]
+                </p>
             </div>
         </div>
         <footer th:replace="layout/plantilla :: footer"/>

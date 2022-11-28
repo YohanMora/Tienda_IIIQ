@@ -14,16 +14,18 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         <header th:replace="layout/plantilla :: header"/>
         <br/>
         <div class="contenido">
-            <h2>Listado Articulos</h2>
-            <a th:href="@{/articulo/nuevoArticulo}">Nuevo Articulo</a>
+            <h2 th:text="#{articulo.titulo}">Listado Articulos</h2>
+            <a th:href="@{/articulo/nuevoArticulo}" th:text="#{articulo.nuevo}">Nuevo Articulo</a>
             <div th:if="${listaArticulos != null and !listaArticulos.empty}">
                 <table border="1">
                     <thead>
                         <tr>
-                            <th>Descripción</th>
-                            <th>Precio</th>
-                            <th>Existencias</th>
-                            <th>Activo</th>
+                            <th th:text="#{articulo.descripcion}">Descripción</th>
+                            <th th:text="#{articulo.precio}">>Precio</th>
+                            <th th:text="#{articulo.existencias}">>Existencias</th>
+                            <th th:text="#{articulo.activo}">>Activo</th>
+                            <th th:text="#{accion.actualizar}">>Modificar</th>
+                            <th th:text="#{accion.eliminar}">>Eliminar</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -32,14 +34,16 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
                             <td th:text="${#numbers.formatDecimal(item.precio,3,2)}"></td>            
                             <td th:text="${item.existencias}"></td>
                             <td><input type="checkbox" name="activo" th:checked="${item.activo}" disabled/></td>
-                            <td><a th:href="@{/articulo/modificarArticulo/} + ${item.idArticulo}">Modificar</a></td>
+                            <td><a th:href="@{/articulo/modificarArticulo/} + ${item.idArticulo}" >Modificar</a></td>
                             <td><a th:href="@{/articulo/eliminarArticulo/} + ${item.idArticulo}">Eliminar</a></td>
                         </tr>
                     </tbody>
                 </table> 
             </div>
             <div th:if="${listaArticulos == null or listaArticulos.empty}">
-                Lista de articulos vacía
+                <p>
+                    [[#{articulo.no_mostrar}]]
+                </p>
             </div>
         </div>
         <footer th:replace="layout/plantilla :: footer"/>
