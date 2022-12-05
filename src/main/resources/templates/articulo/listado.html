@@ -4,48 +4,16 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to c
 Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
 -->
 <html xmlns:th="http://www.thymeleaf.org">
-    <head>
+    <head th:replace="layout/plantilla :: head">
         <title>TechShop</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="/css/menu.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <header th:replace="layout/plantilla :: header"/>
-        <br/>
-        <div class="contenido">
-            <h2 th:text="#{articulo.titulo}">Listado Articulos</h2>
-            <a th:href="@{/articulo/nuevoArticulo}" th:text="#{articulo.nuevo}">Nuevo Articulo</a>
-            <div th:if="${listaArticulos != null and !listaArticulos.empty}">
-                <table border="1">
-                    <thead>
-                        <tr>
-                            <th th:text="#{articulo.descripcion}">Descripción</th>
-                            <th th:text="#{articulo.precio}">>Precio</th>
-                            <th th:text="#{articulo.existencias}">>Existencias</th>
-                            <th th:text="#{articulo.activo}">>Activo</th>
-                            <th th:text="#{accion.actualizar}">>Modificar</th>
-                            <th th:text="#{accion.eliminar}">>Eliminar</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr th:each="item : ${listaArticulos}">
-                            <td th:text="${item.descripcion}"></td>
-                            <td th:text="${#numbers.formatDecimal(item.precio,3,2)}"></td>            
-                            <td th:text="${item.existencias}"></td>
-                            <td><input type="checkbox" name="activo" th:checked="${item.activo}" disabled/></td>
-                            <td><a th:href="@{/articulo/modificarArticulo/} + ${item.idArticulo}" >Modificar</a></td>
-                            <td><a th:href="@{/articulo/eliminarArticulo/} + ${item.idArticulo}">Eliminar</a></td>
-                        </tr>
-                    </tbody>
-                </table> 
-            </div>
-            <div th:if="${listaArticulos == null or listaArticulos.empty}">
-                <p>
-                    [[#{articulo.no_mostrar}]]
-                </p>
-            </div>
-        </div>
-        <footer th:replace="layout/plantilla :: footer"/>
+        <header th:replace="layout/plantilla :: header" />
+
+        <section th:replace="articulo/fragmentosArticulo :: botonesAgregar"/>
+        <section th:replace="articulo/fragmentosArticulo :: agregarArticulo"/>
+        <section th:replace="articulo/fragmentosArticulo :: listadoArticulos"/>
+
+        <footer th:replace="layout/plantilla :: footer" />
     </body>
 </html>

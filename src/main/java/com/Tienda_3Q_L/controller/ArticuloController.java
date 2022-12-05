@@ -30,8 +30,13 @@ public class ArticuloController {
     @GetMapping("/articulo/listado")
     public String page(Model model) {
         var articulos = articuloService.getArticulos(false);
-     
+        
+        model.addAttribute("totalArticulos",articulos.size());
+        
         model.addAttribute("listaArticulos",articulos);
+        
+        var listCategorias = categoriaService.getCategorias(true);
+        model.addAttribute("listCategorias",listCategorias);
         
         return "/articulo/listado";
     }
